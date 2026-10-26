@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jigyasha Gupta - Personal Portfolio</title>
+    <style>
+        /* --- CSS STYLING & VARIABLES --- */
+        :root {
+            --primary-color: #0d9488;
+            --primary-hover: #0f766e;
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        /* Dark Theme Variables (Toggled via JS) */
+        .dark-theme {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* --- NAVIGATION BAR --- */
+        nav {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        /* REQUIRED CSS PSEUDO-CLASSES FOR NAVIGATION LINKS */
+        .nav-links a:link {
+            color: #0284c7;          /* 1. :link - Unvisited state */
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .nav-links a:visited {
+            color: #7c3aed;          /* 2. :visited - Visited state */
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color); /* 3. :hover - Mouse-over state */
+            text-decoration: underline;
+        }
+
+        .nav-links a:active {
+            color: #e11d48;          /* 4. :active - Active click state */
+        }
+
+        /* --- MAIN CONTAINER LAYOUT --- */
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 20px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            text-align: center;
+            padding: 45px 20px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            margin: 0 0 8px 0;
+            color: #38bdf8;
+        }
+
+        .hero p {
+            font-size: 16px;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* --- SKILLS BADGES --- */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-pill {
+            background-color: #ccfbf1;
+            color: #115e59;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* --- PROJECTS TABLE --- */
+        .project-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .project-table th, .project-table td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+        }
+
+        .project-table th {
+            color: var(--primary-color);
+        }
+
+        /* --- BUTTONS & THEME TOGGLE --- */
+        .theme-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* --- CONTACT FORM --- */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-sizing: border-box;
+            outline: none;
+            background-color: var(--card-bg);
+            color: var(--text-main);
+        }
+
+        textarea {
+            height: 90px;
+            resize: vertical;
+        }
+
+        #successAlert {
+            display: none;
+            margin-top: 15px;
+            background: #d1fae5;
+            color: #065f46;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">Jigyasha.dev</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><button class="theme-btn" id="themeToggle">Toggle Theme</button></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <!-- Hero Banner -->
+        <div class="hero">
+            <h1>Jigyasha Gupta</h1>
+            <p>Computer Science Engineering Student</p>
+        </div>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                Welcome to my portfolio! I am Jigyasha Gupta, a Computer Science student dedicated to learning frontend architecture, responsive design, and core programming paradigms. This webpage showcases standard HTML structural design, CSS state pseudo-classes, and dynamic DOM manipulation using JavaScript.
+            </p>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Technical Proficiencies</h2>
+            <div class="skills-container">
+                <span class="skill-pill">HTML5 Structural Tags</span>
+                <span class="skill-pill">CSS3 & Pseudo-Classes</span>
+                <span class="skill-pill">JavaScript ES6</span>
+                <span class="skill-pill">Responsive Layouts</span>
+                <span class="skill-pill">Git & Code Control</span>
+            </div>
+        </section>
+
+        <!-- Projects Table Section -->
+        <section id="projects">
+            <h2>Academic Projects</h2>
+            <table class="project-table">
+                <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Description</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Student Record System</td>
+                        <td>Console-based C++ application managing student profiles.</td>
+                        <td><a href="https://github.com" target="_blank">Repository ↗</a></td>
+                    </tr>
+                    <tr>
+                        <td>Web Portfolio Page</td>
+                        <td>Interactive web application using HTML, CSS, and JavaScript.</td>
+                        <td><a href="https://github.com" target="_blank">Repository ↗</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Interactive Contact Form Section -->
+        <section id="contact">
+            <h2>Send a Message</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="senderName">Your Name:</label>
+                    <input type="text" id="senderName" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="senderEmail">Your Email:</label>
+                    <input type="email" id="senderEmail" required placeholder="name@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="senderMessage">Message:</label>
+                    <textarea id="senderMessage" required placeholder="Type your query here..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Form</button>
+            </form>
+            <div id="successAlert">Thank you, Jigyasha will get back to you shortly!</div>
+        </section>
+
+    </div>
+
+    <!-- --- JAVASCRIPT BEHAVIOR --- -->
+    <script>
+        // 1. Contact Form Handler
+        const contactForm = document.getElementById('contactForm');
+        const successAlert = document.getElementById('successAlert');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            contactForm.style.display = 'none';
+            successAlert.style.display = 'block';
+        });
+
+        // 2. Interactive Theme Switcher (Light/Dark Mode)
+        const themeToggleBtn = document.getElementById('themeToggle');
+        themeToggleBtn.addEventListener('click', function() {
+            document.body.classList.toggle('dark-theme');
+        });
+    </script>
+
+</body>
+</html>
